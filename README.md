@@ -61,7 +61,7 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 ## Circuit Diagram
 
 ```
-![Circuit Diagram](../../Circuit_Diagram.png)
+![Circuit Diagram](./Circuit_Diagram.png)
 ```
 
 ## Code File
