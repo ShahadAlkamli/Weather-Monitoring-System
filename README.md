@@ -1,4 +1,4 @@
-# Weather Monitoring System
+#  Weather Monitoring System
 
 This project is an IoT-based weather monitoring system built using the ESP8266 NodeMCU. It measures temperature, humidity, atmospheric pressure, rain intensity, and ambient light, then displays the data on a 16×2 LCD and sends it to the Blynk IoT Cloud for real-time remote monitoring.
 
@@ -21,28 +21,28 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 
 ## Features
 
-- Real-time temperature and humidity monitoring
-- Atmospheric pressure measurement
-- Rain detection and intensity level calculation
-- Light detection using an LDR sensor
-- Local LCD display output
-- Blynk IoT dashboard integration (mobile and web)
-- Wi-Fi enabled cloud connectivity
-- Automatic timed data updates using BlynkTimer
+- Real-time temperature and humidity monitoring  
+- Atmospheric pressure measurement  
+- Rain detection and intensity level calculation  
+- Light detection using an LDR sensor  
+- Local LCD display output  
+- Blynk IoT dashboard integration  
+- Wi-Fi enabled cloud connectivity  
+- Automatic timed data updates  
 
 ---
 
 ## Hardware Components
 
-- ESP8266 NodeMCU
-- DHT11 temperature and humidity sensor
-- BMP180 barometric pressure sensor
-- Rain sensor module
-- LDR light sensor
-- 16×2 LCD with I2C module
-- Breadboard
-- Jumper wires
-- USB cable for programming
+- ESP8266 NodeMCU  
+- DHT11 temperature and humidity sensor  
+- BMP180 barometric pressure sensor  
+- Rain sensor module  
+- LDR light sensor  
+- 16×2 LCD with I2C module  
+- Breadboard  
+- Jumper wires  
+- USB cable for programming  
 
 ---
 
@@ -67,24 +67,24 @@ WMS.ino
 ```
 
 This file includes:
-- Wi-Fi setup
-- Blynk authentication
-- Sensor reading functions
-- LCD display output
-- Cloud communication
-- Timed data updates
+- Wi-Fi setup  
+- Blynk authentication  
+- Sensor reading functions  
+- LCD display output  
+- Cloud communication  
+- Timed data updates  
 
 ---
 
 ## Demo Video
 
-If a demo video is included in the repository, it will be located at:
+A demonstration video is included in the repository as:
 
 ```
 Demo.MOV
 ```
 
-Alternatively, if hosted externally, the link can be placed here.
+The demo shows the system displaying live sensor readings on the LCD screen and updating the data in real time on both the Blynk mobile and web dashboards.
 
 ---
 
@@ -92,11 +92,11 @@ Alternatively, if hosted externally, the link can be placed here.
 
 ### 1. Install Required Libraries
 Install the following from the Arduino IDE Library Manager:
-- ESP8266 board package
-- Blynk library
-- DHT sensor library
-- Adafruit BMP085/BMP180 library
-- LiquidCrystal_I2C library
+- ESP8266 board package  
+- Blynk library  
+- DHT sensor library  
+- Adafruit BMP085/BMP180 library  
+- LiquidCrystal_I2C library  
 
 ### 2. Configure Credentials
 Update the following fields in `WMS.ino`:
@@ -108,17 +108,17 @@ char pass[] = "YOUR_WIFI_PASSWORD";
 ```
 
 ### 3. Select the ESP8266 Board
-In Arduino IDE:
+In Arduino IDE:  
 Tools → Board → NodeMCU 1.0 (ESP-12E Module)
 
 ### 4. Upload the Code
 Connect the ESP8266 to your computer, select the correct COM port, and upload the code.
 
 ### 5. Monitor Data
-Data appears:
-- On the 16×2 LCD screen
-- On the Blynk mobile app
-- On the Blynk web dashboard
+Data appears:  
+- On the 16×2 LCD screen  
+- On the Blynk mobile app  
+- On the Blynk web dashboard  
 
 ---
 
@@ -129,6 +129,7 @@ IoT-Weather-Monitoring-System/
 │
 ├── WMS.ino
 ├── Circuit_Diagram.png
+├── Demo.MOV
 └── README.md
 ```
 
