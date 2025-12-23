@@ -78,8 +78,7 @@ This file includes:
 
 ## Demo Video
 
-[![Demo Video](https://img.youtube.com/vi/iuUvchgC3Vo/0.jpg)](https://youtube.com/shorts/iuUvchgC3Vo?feature=share)
-
+[![Demo Video](https://img.youtube.com/vi/iuUvchgC3Vo/maxresdefault.jpg)](https://youtube.com/shorts/iuUvchgC3Vo?feature=share)
 
 The demo shows the system displaying live sensor readings on the LCD screen and updating the data in real time on both the Blynk mobile and web dashboards.
 
