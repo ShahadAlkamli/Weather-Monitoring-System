@@ -60,6 +60,7 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 
 ## Circuit Diagram
 
+![Circuit Diagram](https://github.com/user-attachments/assets/6b671b2f-44d3-423c-a751-6ce37aa69f34)
 ![Circuit Diagram](Circuit_Diagram.png)
 
 
