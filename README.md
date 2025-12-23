@@ -123,19 +123,6 @@ Data appears:
 
 ---
 
-## Project Structure
-
-```
-IoT-Weather-Monitoring-System/
-│
-├── WMS.ino
-├── Circuit_Diagram.png
-├── Demo.MOV
-└── README.md
-```
-
----
-
 ## Conclusion
 
 This project demonstrates a complete IoT-based environmental monitoring system using the ESP8266. It integrates multiple sensors, cloud connectivity, and real-time data visualization, making it suitable for learning, academic projects, and practical IoT applications.
