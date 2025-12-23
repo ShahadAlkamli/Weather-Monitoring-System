@@ -30,20 +30,31 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 - Wi-Fi enabled cloud connectivity  
 - Automatic timed data updates  
 
+## Requirements
 
-
-## Hardware Components
-
+### Hardware
 - ESP8266 NodeMCU  
-- DHT11 temperature and humidity sensor  
-- BMP180 barometric pressure sensor  
-- Rain sensor module  
-- LDR light sensor  
-- 16×2 LCD with I2C module  
-- Breadboard  
+- DHT11 Temperature & Humidity Sensor  
+- BMP180 Pressure Sensor  
+- Rain Sensor (YL-83 + analog module)  
+- LDR (Light Dependent Resistor) module  
+- 16×2 LCD Display with I2C interface  
 - Jumper wires  
-- USB cable for programming  
+- USB cable for powering and uploading code  
 
+### Software
+- Arduino IDE  
+- ESP8266 Board Package installed  
+- Required Arduino libraries:  
+  - **Blynk**  
+  - **DHT sensor library**  
+  - **Adafruit BMP085/BMP180 library**  
+  - **LiquidCrystal_I2C**  
+  - **Wire**  
+
+### Connectivity
+- Wi-Fi network for the NodeMCU  
+- Valid Blynk authentication token  
 
 
 ## Pin Connections
