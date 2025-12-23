@@ -2,7 +2,7 @@
 
 This project is an IoT-based weather monitoring system built using the ESP8266 NodeMCU. It measures temperature, humidity, atmospheric pressure, rain intensity, and ambient light, then displays the data on a 16×2 LCD and sends it to the Blynk IoT Cloud for real-time remote monitoring.
 
----
+
 
 ## Project Overview
 
@@ -17,7 +17,7 @@ The system measures:
 
 All readings are updated locally through the LCD and remotely through the Blynk dashboard.
 
----
+
 
 ## Features
 
@@ -30,7 +30,7 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 - Wi-Fi enabled cloud connectivity  
 - Automatic timed data updates  
 
----
+
 
 ## Hardware Components
 
@@ -44,7 +44,7 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 - Jumper wires  
 - USB cable for programming  
 
----
+
 
 ## Pin Connections
 
@@ -56,7 +56,7 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 | BMP180 Sensor   | SDA → D2, SCL → D1 |
 | LCD (I2C)       | SDA → D2, SCL → D1 |
 
----
+
 
 ## Circuit Diagram
 
@@ -79,7 +79,7 @@ This file includes:
 - Cloud communication  
 - Timed data updates  
 
----
+
 
 ## Demo Video
 
@@ -87,7 +87,7 @@ This file includes:
 
 The demo shows the system displaying live sensor readings on the LCD screen and updating the data in real time on both the Blynk mobile and web dashboards.
 
----
+
 
 ## How to Use
 
@@ -121,7 +121,7 @@ Data appears:
 - On the Blynk mobile app  
 - On the Blynk web dashboard  
 
----
+
 
 ## Conclusion
 
