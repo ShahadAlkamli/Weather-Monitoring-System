@@ -61,7 +61,7 @@ All readings are updated locally through the LCD and remotely through the Blynk 
 ## Circuit Diagram
 
 ```
-<img src="https://raw.githubusercontent.com/ShahadAlkamli/Weather-Monitoring-System/main/Circuit_Diagram.png" width="600">
+![Circuit Diagram](../Circuit_Diagram.png)
 ```
 
 ## Code File
