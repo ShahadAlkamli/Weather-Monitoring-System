@@ -1,171 +1,185 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#define BLYNK_TEMPLATE_ID "TMPL6CnptallS"
+
+#define BLYNK_TEMPLATE_ID "YOUR_TEMPLATE_ID"
 #define BLYNK_TEMPLATE_NAME "Weather Monitoring System"
 #define BLYNK_PRINT Serial
+
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <DHT.h>
 #include <SFE_BMP180.h>
 
-// Initialize the LCD display
+// -------------------------------------------
+// LCD Display
+// -------------------------------------------
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// Create an object for the BMP180 sensor
+// -------------------------------------------
+// BMP180 Sensor
+// -------------------------------------------
 SFE_BMP180 bmp;
 
-char auth[] = "BaIwiMAy5bVgB6GYQB9w_x0R3WFbfphg"; // Auth token
-char ssid[] = "iPhone"; // WIFI name
-char pass[] = "9988998899"; // WIFI password
+// -------------------------------------------
+// Blynk Authentication & WiFi Credentials
+// -------------------------------------------
+char auth[] = "YOUR_BLYNK_AUTH_TOKEN";
+char ssid[] = "YOUR_WIFI_SSID";
+char pass[] = "YOUR_WIFI_PASSWORD";
 
-DHT dht(D3, DHT11); // (DHT sensor pin, sensor type)
-BlynkTimer timer;
+// -------------------------------------------
+// DHT11 Sensor
+// -------------------------------------------
+DHT dht(D3, DHT11);
 
-// Define Rain and LDR pins
+// -------------------------------------------
+// Pins for Additional Sensors
+// -------------------------------------------
 #define rain A0
 #define light D0
 
-// Create variables for pressure
-double T, P;
-char status;
+BlynkTimer timer;
 
+// -------------------------------------------
+// Setup Function
+// -------------------------------------------
 void setup() {
-  Serial.begin(9600); // Set baud rate for Serial communication
-  Serial.println("Starting setup..."); // Debugging info
+  Serial.begin(9600);
 
-  // Initialize BMP180 sensor
+  // BMP180 initialization
   if (bmp.begin()) {
     Serial.println("BMP180 initialized");
   } else {
-    Serial.println("BMP180 not detected");
+    Serial.println("BMP180 NOT detected");
   }
-  // Initialize the LCD display
-  lcd.begin(16, 2); 
+
+  // LCD initialization
+  lcd.begin(16, 2);
   lcd.backlight();
   lcd.setCursor(0, 0);
-  lcd.print("Initializing...");
-
-  pinMode(light, INPUT);
-  
-  // Connect to Blynk
-  Blynk.begin(auth, ssid, pass, "blynk.cloud", 80);
-  Serial.println("Blynk connected"); // Debugging info
-
-  // Start DHT11 sensor
-  dht.begin();
-  Serial.println("DHT11 started"); // Debugging info
-
-  // LCD welcome message
-  lcd.setCursor(0, 0);
   lcd.print("Weather Monitor");
-  lcd.setCursor(4, 1);
-  lcd.print("System");
-  delay(4000);
+  lcd.setCursor(0, 1);
+  lcd.print("Initializing...");
+  delay(3000);
   lcd.clear();
 
-  // Call the functions every specific interval
-  timer.setInterval(2000L, DHT11sensor);  // Adjust interval to 2 seconds for DHT11
-  timer.setInterval(1000L, rainSensor);   // Adjust interval for rain sensor
-  timer.setInterval(5000L, pressure);     // 5-second interval for pressure sensor
-  timer.setInterval(1000L, LDRsensor);    // 1-second interval for LDR sensor
+  // WiFi + Blynk
+  Blynk.begin(auth, ssid, pass, "blynk.cloud", 80);
 
-  Serial.println("Setup complete"); // Debugging info
+  // DHT11 start
+  dht.begin();
+
+  // Timer intervals
+  timer.setInterval(2000L, DHT11sensor);
+  timer.setInterval(1000L, rainSensor);
+  timer.setInterval(5000L, pressure);
+  timer.setInterval(1000L, LDRsensor);
+
+  pinMode(light, INPUT);
 }
 
-// Get the DHT11 sensor values
+// -------------------------------------------
+// DHT11 Sensor Reading
+// -------------------------------------------
 void DHT11sensor() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
 
   if (isnan(h) || isnan(t)) {
-    Serial.println("Failed to read from DHT sensor!");
+    Serial.println("DHT read failed!");
     return;
   }
 
-  // Send data to Blynk
+  // Send to Blynk
   Blynk.virtualWrite(V0, t);
   Blynk.virtualWrite(V1, h);
 
-  // Display temperature and humidity on LCD
+  // Show on LCD
   lcd.setCursor(0, 0);
   lcd.print("T:");
   lcd.print(t);
+  lcd.print("C  ");
+
   lcd.setCursor(8, 0);
   lcd.print("H:");
   lcd.print(h);
+  lcd.print("% ");
 
-  // Debugging info
-  Serial.print("Temperature: ");
+  Serial.print("Temp: ");
   Serial.print(t);
-  Serial.print("C, Humidity: ");
-  Serial.print(h);
-  Serial.println("%");
+  Serial.print(" °C, Humidity: ");
+  Serial.println(h);
 }
 
-// Get the rain sensor values
+// -------------------------------------------
+// Rain Sensor
+// -------------------------------------------
 void rainSensor() {
   int value = analogRead(rain);
-  value = map(value, 1024, 0, 0, 100);  // Invert the mapping
+  value = map(value, 1024, 0, 0, 100);
 
-  // Send data to Blynk
   Blynk.virtualWrite(V2, value);
 
-  // Display rain sensor value on LCD
   lcd.setCursor(0, 1);
   lcd.print("R:");
   lcd.print(value);
-  lcd.print(" ");
+  lcd.print("% ");
 
-  // Debugging info
-  Serial.print("Rain sensor value: ");
-  Serial.println(value);
+  Serial.print("Rain: ");
+  Serial.print(value);
+  Serial.println("%");
 }
 
+// -------------------------------------------
+// Pressure Sensor (BMP180)
+// -------------------------------------------
+double T, P;
+char status;
 
-// Get the pressure values
 void pressure() {
   status = bmp.startTemperature();
   if (status != 0) {
-    delay(5); // Small delay for temperature measurement
-    status = bmp.getTemperature(T);
+    delay(5);
 
-    status = bmp.startPressure(3); // 0 to 3
+    status = bmp.getTemperature(T);
+    status = bmp.startPressure(3);
+
     if (status != 0) {
-      delay(5); // Small delay for pressure measurement
+      delay(5);
       status = bmp.getPressure(P, T);
+
       if (status != 0) {
         Blynk.virtualWrite(V3, P);
+
         lcd.setCursor(8, 1);
         lcd.print("P:");
         lcd.print(P);
 
-        // Debugging info
         Serial.print("Pressure: ");
-        Serial.print(P);
-        Serial.println(" Pa");
+        Serial.println(P);
       }
     }
   }
 }
 
-// Get the LDR sensor values
+// -------------------------------------------
+// LDR Sensor
+// -------------------------------------------
 void LDRsensor() {
   bool value = digitalRead(light);
   WidgetLED LED(V4);
-  if (value == 0) {
-    LED.on();
-  } else {
-    LED.off();
-  }
 
-  // Debugging info
-  Serial.print("LDR sensor value: ");
+  if (value == 0) LED.on();
+  else LED.off();
+
+  Serial.print("Light: ");
   Serial.println(value);
 }
 
+// -------------------------------------------
+// Loop
+// -------------------------------------------
 void loop() {
-  Blynk.run(); // Run the Blynk library
-  timer.run(); // Run the Blynk timer
+  Blynk.run();
+  timer.run();
 }
-
-
