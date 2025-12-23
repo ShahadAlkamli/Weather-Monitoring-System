@@ -78,8 +78,6 @@ This file includes:
 
 ## Demo Video
 
-## Demo Video
-
 [![Demo Video](https://img.youtube.com/vi/iuUvchgC3Vo/0.jpg)](https://youtube.com/shorts/iuUvchgC3Vo?feature=share)
 
 
